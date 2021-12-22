@@ -31,6 +31,14 @@ export class CrisisDetailComponent implements OnInit {
     // so that the HeroList component can select that hero.
     // Include a junk 'foo' property for fun.
     this.router.navigate(['../', { id: crisisId, foo: 'foo' }], { relativeTo: this.route });
+  }
 
+  cancel() {
+    this.gotoCrises();
+  }
+
+  save() {
+    this.crisis.name = this.editName;
+    this.gotoCrises();
   }
 }

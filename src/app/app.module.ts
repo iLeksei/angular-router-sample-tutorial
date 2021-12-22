@@ -11,6 +11,9 @@ import {CrisisCenterModule} from "./crisis-center/crisis-center.module";
 import {CrisisCenterRoutingModule} from "./crisis-center/crisis-center-routing.module";
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
 import {FormsModule} from "@angular/forms";
+import {AdminModule} from "./admin/admin.module";
+import { LoginComponent } from './auth/login/login.component';
+import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import {FormsModule} from "@angular/forms";
     BrowserAnimationsModule,
     CrisisCenterModule,
     CrisisCenterRoutingModule,
+    AdminModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
