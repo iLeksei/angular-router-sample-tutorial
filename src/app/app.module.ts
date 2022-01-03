@@ -14,6 +14,8 @@ import {FormsModule} from "@angular/forms";
 import {AdminModule} from "./admin/admin.module";
 import { LoginComponent } from './auth/login/login.component';
 import {AuthModule} from "./auth/auth.module";
+import {AuthRoutingModule} from "./auth/auth-routing.module";
+import {AdminRoutingModule} from "./admin/admin-routing.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import {AuthModule} from "./auth/auth.module";
     BrowserModule,
     AppRoutingModule,
     HeroesRoutingModule,
+    AuthRoutingModule,
+    AdminRoutingModule,
     HeroesModule,
     FormsModule,
     BrowserAnimationsModule,
