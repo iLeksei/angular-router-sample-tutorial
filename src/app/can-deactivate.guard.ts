@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanDeactivate, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
 import { Observable } from 'rxjs';
 import {CrisisDetailComponent} from "./crisis-center/crisis-detail/crisis-detail.component";
 
-export interface CanComponentDeactivate {
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
-}
-
+/**
+ * it help us to determine whether a route can be deactivated or not
+ */
 @Injectable({
   providedIn: 'root'
 })

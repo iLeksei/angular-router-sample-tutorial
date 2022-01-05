@@ -1,17 +1,17 @@
-import {Injectable, OnInit} from '@angular/core';
-import {EMPTY, mergeMap, Observable, of, switchMap, take} from "rxjs";
+import {Injectable} from '@angular/core';
+import {EMPTY, mergeMap, Observable, of, take} from "rxjs";
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
-  ParamMap,
   Resolve,
-  Route,
   Router,
   RouterStateSnapshot
 } from "@angular/router";
 import {Crisis} from "./crisis";
 import {CrisisService} from "./crisis.service";
 
+/**
+ * it helps us to do something before loading our route
+ */
 @Injectable({
   providedIn: 'root'
 })
