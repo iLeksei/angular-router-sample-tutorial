@@ -2,33 +2,39 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  CanActivateChild, NavigationExtras,
+  CanActivateChild, CanLoad, NavigationExtras,
+  Route,
   Router,
   RouterStateSnapshot,
-  UrlTree
 } from '@angular/router';
-import { Observable } from 'rxjs';
 import {AuthService} from "./auth.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService, private router: Router) {
-  }
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean | UrlTree {
-    console.log('AuthGuard#canActivate called');
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
+
     return this.checkLogin(url);
   }
 
-  private checkLogin(url: string): boolean | UrlTree {
-    if (this.authService.isLoggedIn) { return true };
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(route, state);
+  }
 
+  canLoad(route: Route): boolean {
+    const url = `/${route.path}`;
+
+    return this.checkLogin(url);
+  }
+
+  checkLogin(url: string): boolean {
+    if (this.authService.isLoggedIn) { return true; }
+
+    // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
 
     // Create a dummy session id
@@ -41,14 +47,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       fragment: 'anchor'
     };
 
-    // Redirect to the login page with extras
-    return this.router.createUrlTree(["/login"], navigationExtras);
+    // Navigate to the login page with extras
+    this.router.navigate(['/login'], navigationExtras);
+    return false;
   }
-
-  canActivateChild(route: ActivatedRouteSnapshot,
-                   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    return this.canActivate(route, state);
-  }
-
 }

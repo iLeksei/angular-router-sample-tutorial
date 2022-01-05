@@ -7,8 +7,6 @@ import { CrisisCenterComponent } from './crisis-center/crisis-center.component';
 import { CrisisCenterHomeComponent } from './crisis-center-home/crisis-center-home.component';
 import {CrisisDetailComponent} from "./crisis-detail/crisis-detail.component";
 import {CrisisListComponent} from "./crisis-list/crisis-list.component";
-import {BrowserModule} from "@angular/platform-browser";
-import {AppRoutingModule} from "../app-routing.module";
 
 
 @NgModule({
@@ -19,13 +17,10 @@ import {AppRoutingModule} from "../app-routing.module";
     CrisisListComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     CommonModule,
     CrisisCenterRoutingModule,
     FormsModule,
   ],
-  exports: [
-  ]
+  exports: []
 })
 export class CrisisCenterModule { }

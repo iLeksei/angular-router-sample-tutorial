@@ -5,39 +5,34 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HeroesModule } from './heroes/heroes.module';
-import {HeroesRoutingModule} from "./heroes/heroes-routing.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CrisisCenterModule} from "./crisis-center/crisis-center.module";
-import {CrisisCenterRoutingModule} from "./crisis-center/crisis-center-routing.module";
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
 import {FormsModule} from "@angular/forms";
-import {AdminModule} from "./admin/admin.module";
-import { LoginComponent } from './auth/login/login.component';
 import {AuthModule} from "./auth/auth.module";
-import {AuthRoutingModule} from "./auth/auth-routing.module";
-import {AdminRoutingModule} from "./admin/admin-routing.module";
+import {Router} from "@angular/router";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    ComposeMessageComponent,
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HeroesRoutingModule,
-    AuthRoutingModule,
-    AdminRoutingModule,
-    HeroesModule,
-    FormsModule,
     BrowserAnimationsModule,
-    CrisisCenterModule,
-    CrisisCenterRoutingModule,
-    AdminModule,
+    FormsModule,
+    HeroesModule,
     AuthModule,
+    AppRoutingModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    ComposeMessageComponent,
+    PageNotFoundComponent
+  ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    // Use a custom replacer to display function names in the route configs
+    const replacer = (key: any, value: any) => (typeof value === 'function') ? value.name : value;
+
+    console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
+  }
+}

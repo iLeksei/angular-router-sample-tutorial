@@ -7,7 +7,7 @@ import {NavigationExtras, Router} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   message: string;
 
   constructor(public authService: AuthService, public router: Router) {
@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
         // However to keep the example simple, we will always redirect to `/admin`.
         const redirectUrl = '/admin';
 
+        // Set our navigation extras object
+        // that passes on our global query params and fragment
         const navigationExtras: NavigationExtras = {
           queryParamsHandling: 'preserve',
           preserveFragment: true
@@ -43,8 +45,4 @@ export class LoginComponent implements OnInit {
     this.authService.logout();
     this.message = this.getMessage();
   }
-
-  ngOnInit(): void {
-  }
-
 }
